@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listNewProducts = (List<Model.EF.Product>)ViewBag.NewProducts;
+    var listFeatureProducts = (List<Model.EF.Product>)ViewBag.ListFeatureProducts;
+}
+
+    <div class="row shop_inner_inf">
+        <!-- tittle heading -->
+        <!-- //tittle heading -->
+        <!-- product left -->
+        <div class="side-bar col-md-3">
+            <div class="search-hotel">
+                <h3 class="agileits-sear-head">Tìm Kiếm</h3>
+                <form action="#" method="post">
+                    <input type="search" placeholder="Tên sản phẩm ..." name="search" required="">
+                    <input type="submit" value=" ">
+                </form>
+            </div>
+            <!--preference -->
+            
+                <div class=" left-side">
+                    <h3 class="agileits-sear-head">Danh mục sản phẩm </h3>
+                    @{ Html.RenderAction("ProductCategory", "Product");}
+                </div>
+              
+            
+            <!-- // preference -->
+        </div>
+        <!-- //product left -->
+        <!-- product right -->
+        <div class="left-ads-display col-md-9">
+            <div class="row wrapper_top_shop">
+               
+                <!-- product-sec1 -->
+                <div class="product-sec1 row">
+                    @foreach (var item in listNewProducts)
+                    {
+                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                        <div class="col-md-4 product-men">
+                            <div class="product-shoe-info shoe">
+                                <div class="men-pro-item">
+                                    <div class="men-thumb-item">
+                                        <img src="@item.Image" alt="@item.Name">
+                                        <div class="men-cart-pro">
+                                            <div class="inner-men-cart-pro">
+                                                <a href="@url" class="link-product-add-cart">Xem sản phẩm</a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="item-info-product">
+                                        <h4>
+                                            <a href="@url">@item.Name </a>
+                                        </h4>
+                                        <div class="info-product-price">
+                                            <div class="grid_meta">
+                                                <div class="product_price">
+                                                    <div class="grid-price ">
+                                                        <span class="money ">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="shoe single-item hvr-outline-out">
+                                                <form action="/them-gio-hang?productId=@item.ID&quantity=1" method="post">
+                                                   
+                                                    <button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+
+                                                    <a href="/them-gio-hang?productId=@item.ID&quantity=1" data-toggle="modal" data-target="#myModal1"></a>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="clearfix"></div>
+
+                </div>
+
+                <!-- //product-sec1 -->
+                <div class="col-md-6 shop_left shp">
+                    <img src="~/assets/client/images/banner4.jpg" alt="">
+                    <h6>Giảm tới 21%</h6>
+                </div>
+                <div class="col-md-6 shop_right shp">
+                    <img src="~/assets/client/images/banner1.jpg" alt="">
+                    <h6>Giảm tới 31%</h6>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+   

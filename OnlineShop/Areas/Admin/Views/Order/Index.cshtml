@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<Model.EF.Order>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+    Danh sách đơn hàng
+}
+<div class="card-body">
+    @using (Html.BeginForm("Index", "Order", FormMethod.Get))
+    {
+        <div class="row form-group">
+            <div class="col-lg-12">
+                <div class="col-md-4">
+                    <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                    <a class="btn btn-primary" href="/Admin/OrderDetail/Index">Danh sách đăt hàng chi tiết</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày nhận đơn</th>
+                    <th>Người đặt hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Email người nhận</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày nhận đơn</th>
+                    <th>Người đặt hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Email người nhận</th>
+                    <th>#</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr id="row_@item.ID">
+
+                    <td>@item.ID</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.ShipName</td>
+                    <td>@item.ShipMobile</td>
+                    <td>@item.ShipAddress</td>
+                    <td>@item.ShipEmail</td>
+                    <td>
+                        @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions
+                       {
+                           Confirm = "Bạn có muốn xoá bản ghi này?",
+                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                           HttpMethod = "Delete"
+                       })
+
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,17 @@
+﻿@model List<Model.EF.Menu>
+
+<div class="inner_breadcrumb_agileits_w3">
+
+    <ul class="short">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a style="color:white" href="@item.Link" target="@item.Target">@item.Text <i>|</i></a>
+
+
+            </li>
+         }
+
+    </ul>
+</div>
+

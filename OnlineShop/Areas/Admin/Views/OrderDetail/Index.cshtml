@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<Model.EF.OrderDetail>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Chi tiết các đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{
+    Danh sách chi tiết các đơn hàng
+}
+<div class="card-body">
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Mã sản phẩm</th>
+                    <th>Mã order</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>                   
+                   
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã sản phẩm</th>
+                    <th>Mã order</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                   
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.ProductID">
+
+                        <td>@item.ProductID</td>
+                        <td>@item.OrderID</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>                     
+                       
+
+                    </tr>
+                }
+            </tbody>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+        </table>
+    </div>
+</div>
+

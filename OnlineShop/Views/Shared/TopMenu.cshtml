@@ -1,0 +1,28 @@
+﻿@model List<Model.EF.Menu>
+<div class="overlay overlay-contentpush">
+    <button type="button" class="overlay-close"><i class="fa fa-times" aria-hidden="true"></i></button>
+
+    <nav>
+        @{ var session = (UserLogin)Session[OnlineShop.Common.CommonConstants.USER_SESSION]; 
+        }
+        @if (session == null)
+        {
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li><a href="@item.Link" target="@item.Target">@item.Text</a></li>
+                }
+
+
+            </ul>
+        }
+        else
+        {
+            <ul>
+                <li>Xin chào:@session.UserName</li>
+                <li>@Html.ActionLink("Đăng Xuất", "Logout", "User")</li>
+            </ul>
+
+        }
+    </nav>
+</div>

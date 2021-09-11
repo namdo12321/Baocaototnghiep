@@ -1,0 +1,148 @@
+﻿@model Model.EF.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+    var relatedProducts = (List<Model.EF.Product>)ViewBag.RelatedProducts;
+}
+
+<div class="ads-grid_shop">
+    <div class="shop_inner_inf row">
+        <div class="col-md-4 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+
+                    <ul class="slides">
+                        <li data-thumb="@Model.Image">
+                            <div class="thumb-image"> <img src="@Model.Image" data-imagezoom="true" class="img-responsive" width="560"> </div>
+                        </li>
+
+                       
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 single-right-left simpleCart_shelfItem">
+            <h2>@Model.Name</h2>
+            <br />
+            <h5>Giá:</h5>
+            <p>
+                <span class="item_price">@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ")</span>
+                <del>@Model.PromotionPrice </del>
+            </p>
+            <h5>Size:</h5>
+            <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+                <option value="null">36</option>
+                <option value="null">37</option>
+                <option value="null">38</option>
+                <option value="null">39</option>
+                <option value="null">40</option>
+                <option value="null">41</option>
+                <option value="null">42</option>
+                <option value="null">43</option>
+            </select>
+            <br />
+            <br />
+            <div class="occasion-cart">
+                <div class="shoe single-item single_page_b">
+                    <form action="/them-gio-hang?productId=@Model.ID&quantity=1" method="post">
+                        <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button add">
+
+                        <a href="/them-gio-hang?productId=@Model.ID&quantity=1" data-toggle="modal" data-target="#myModal1"></a>
+                    </form>
+
+                </div>
+
+            </div>
+          
+            <ul class="social-nav model-3d-0 footer-social social single_page">
+                <li class="share"><p>Chia sẻ :</p> </li>
+                <li>
+                    <a href="#" class="facebook">
+                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="twitter">
+                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="instagram">
+                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+            <div class="clearfix"> </div>
+            <br />
+            <br />
+            <br />
+            <!--/tabs-->
+            <div class="single_page">
+                <h2>Chi tiết sản phẩm</h2>
+                <br />
+                <p>@Html.Raw(Model.Detail)</p>
+            </div>
+            <!-- /new_arrivals -->
+            <div class="new_arrivals row">
+                <h3>Sản phẩm liên quan</h3>
+                @foreach (var item in relatedProducts)
+                {
+                    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="col-md-3 product-men women_two">
+                        <div class="product-shoe-info shoe">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="@item.Image" alt="@item.Name">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@url" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <h4>
+                                        <a href="@url">@item.Name </a>
+                                    </h4>
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <div class="grid-price ">
+                                                    <span class="money ">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shoe single-item hvr-outline-out">
+                                            <form action="/them-gio-hang?productId=@item.ID&quantity=1" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="shoe_item" value="Shuberry Heels">
+                                                <input type="hidden" name="amount" value="575.00">
+                                                <button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+
+                                                <a href="/them-gio-hang?productId=@item.ID&quantity=1" data-toggle="modal" data-target="#myModal1"></a>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- /womens -->
+                <!-- //womens -->
+                <div class="clearfix"></div>
+            </div>
+            <!--//new_arrivals-->
+        </div>
+</div>
+
