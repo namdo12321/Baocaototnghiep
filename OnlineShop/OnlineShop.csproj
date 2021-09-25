@@ -3141,6 +3141,7 @@
     <Content Include="Areas\Admin\Views\Productcategory\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetail\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\View.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
