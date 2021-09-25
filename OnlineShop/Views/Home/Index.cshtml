@@ -61,6 +61,11 @@
                                                         <span class="money ">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span>
                                                     </div>
                                                 </div>
+                                                <div class="product_price">
+                                                    <div class="grid-price ">
+                                                        <span class="money" style="color:#ed0000">Khuyến mãi còn: @(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Không giảm giá")</span>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                             <div class="shoe single-item hvr-outline-out">
