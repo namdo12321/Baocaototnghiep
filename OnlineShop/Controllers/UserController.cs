@@ -1,4 +1,5 @@
-﻿ using Model.Dao;
+﻿using BotDetect.Web.Mvc;
+using Model.Dao;
 using Model.EF;
 using OnlineShop.Common;
 using OnlineShop.Models;
@@ -29,6 +30,7 @@ namespace OnlineShop.Controllers
             return Redirect("/");
         }
         [HttpPost]
+        [CaptchaValidationActionFilter("CaptchaCode", "loginCaptcha", "Mã xác nhận không đúng")]
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
@@ -64,6 +66,7 @@ namespace OnlineShop.Controllers
             return View(model);
         }
         [HttpPost]
+        [CaptchaValidationActionFilter("CaptchaCode", "registerCaptcha", "Mã xác nhận không đúng")]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -80,6 +83,7 @@ namespace OnlineShop.Controllers
                 else
                 {
                     var user = new User();
+                    user.UserName = model.UserName;
                     user.Name = model.Name;
                     user.Password = Encryptor.MD5Hash(model.Password);
                     user.Phone = model.Phone;
