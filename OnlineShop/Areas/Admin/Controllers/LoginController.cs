@@ -30,7 +30,15 @@ namespace OnlineShop.Areas.Admin.Controllers
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return RedirectToAction("Index", "Home"); 
+                    if (user.GroupID == "ADMIN")
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return Redirect("/");
+                    }
+                    
                 }else if(result==0)
                 {
                     ModelState.AddModelError("", "Tài khoản không tồn tại");
