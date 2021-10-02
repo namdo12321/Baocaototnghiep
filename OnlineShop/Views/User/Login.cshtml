@@ -42,19 +42,29 @@
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
-        
-           
-                @Html.Captcha(loginCaptcha) 
+
+        <div class="row form-group">
+            <div class="col-md-10">
+                @Html.Captcha(loginCaptcha)
                 @Html.TextBox("CaptchaCode")
-            
-        
+            </div>
+
+        </div>
+
+
        
+     
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Đăng nhập tài khoản" class="btn btn-success" />
+                &ensp;
+                <a href="/User/LoginFacebook">
+                    <img src="~/assets/client/images/facebook.png" />
+                </a>
             </div>
         </div>
+
     </div>
     }
 
