@@ -6,7 +6,7 @@
             var child = Model.Where(x => x.ParentID == item.ID);
             var parentClass = child.Count() > 0 ? "class=dropdown-toggle data-toggle=dropdown" : "";
             <li class="agileits-sear-head">
-                <a href="/san-pham/@item.MetaTitle-@item.ID" @parentClass>@item.Name</a>
+                <a href="/san-pham/@item.MetaTitle-@item.ID" @parentClass style="color:black">@item.Name</a>
                 @if (child.Count() > 0)
             {
                 <ul class="dropdown-menu6">

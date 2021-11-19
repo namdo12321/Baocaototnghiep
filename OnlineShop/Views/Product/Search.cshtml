@@ -1,40 +1,15 @@
-﻿@model List<Model.EF.Product> 
+﻿@model IEnumerable<Model.ViewModel.ProductViewModel>
+
 @{
-    var category = (Model.EF.ProductCategory)ViewBag.Category;
-    ViewBag.Title = category.Name;
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="shop_inner_inf">
-    <h3>@category.Name </h3>
-</div>
 
 <div class="ads-grid_shop">
     <div class="shop_inner_inf row">
-        <!-- tittle heading -->
-        <!-- //tittle heading -->
-        <!-- product left -->
-        <!-- //product left -->
-        <!-- product right -->
-        <div class="side-bar col-md-3">
-            <div class="search-hotel">
-                <h3 class="agileits-sear-head">Tìm Kiếm</h3>
-                <form action="/tim-kiem" method="get">
-                    <input type="text" id="txtKeyword" name="keyword" placeholder="Tên sản phẩm...">
-                    <input type="submit" value=" ">
-                </form>
-            </div>
-            <!--preference -->
-            <div class="customer-rev left-side">
-                <h3 class="agileits-sear-head">Danh mục sản phẩm </h3>
-                @{ Html.RenderAction("ProductCategory", "Product");}
-            </div>
-            <!-- // preference -->
-        </div>
-        <div class="left-ads-display col-md-9">
+        <div class="left-ads-display col-md-12">
             <div class="wrapper_top_shop">
-
-                <div class="clearfix"></div>
-                <!-- product-sec1 -->
+                <h3>Kết quả tìm kiếm theo từ khoá: @ViewBag.Keyword</h3>
                 <div class="product-sec1 row">
                     @foreach (var item in Model)
                     {
@@ -43,12 +18,12 @@
                             <div class="product-shoe-info shoe">
                                 <div class="men-pro-item">
                                     <div class="men-thumb-item">
-                                        <img src="@item.Image" alt="@item.Name">
+                                        <img src="@item.Images" alt="@item.Name">
                                         <div class="men-cart-pro">
                                             <div class="inner-men-cart-pro">
                                                 <a href="@link" class="link-product-add-cart">Xem sản phẩm</a>
                                             </div>
-                                        </div>                                   
+                                        </div>
                                     </div>
                                     <div class="item-info-product">
                                         <h4>
@@ -64,7 +39,7 @@
                                             </div>
                                             <div class="shoe single-item hvr-outline-out">
                                                 <form action="/them-gio-hang?productId=@item.ID&quantity=1" method="post">
-                                                   
+
                                                     <button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
 
                                                     <a href="/them-gio-hang?productId=@item.ID&quantity=1" data-toggle="modal" data-target="#myModal1"></a>
@@ -78,13 +53,75 @@
                             </div>
                         </div>
                     }
-                    <!--/mens-->
-                    <!-- //mens -->
-                    <div class="clearfix"></div>
                 </div>
             </div>
-        </div>
-        <div class="clearfix"></div>
+     </div>
+</div>
+</div>
+        @*<h2>Search</h2>
 
-    </div>
-	</div>
+
+
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Images)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CateName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CateMetaTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MetaTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Images)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CateName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CateMetaTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MetaTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+
+        </table>*@
