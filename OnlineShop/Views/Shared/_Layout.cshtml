@@ -68,8 +68,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
             </div>
             <div id="cd-search" class="cd-search">
-                <form action="#" method="post">
-                    <input name="Search" type="search" placeholder="Click enter after typing...">
+                <form action="/tim-kiem" method="get">
+                    <input type="text" id="txtKeyword" name="keyword" placeholder="Gõ từ khoá">
                 </form>
             </div>
         </div>
@@ -248,7 +248,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!-- //end-smoth-scrolling -->
     <script type="text/javascript" src="~/assets/client/js/bootstrap-3.1.1.min.js"></script>
-
+    <script src="~/assets/client/js/controller/baseController.js"></script>
     @RenderSection("jsFooter", required: false)
 
 

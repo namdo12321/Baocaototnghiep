@@ -16,5 +16,6 @@ namespace Model.ViewModel
         public string CateMetaTitle { set; get; }
         public string MetaTitle { set; get; }
         public DateTime? CreatedDate { set; get; }
+        public decimal? PromotionPrice { get; set; }
     }
 }
