@@ -1,4 +1,5 @@
-﻿ using Model.Dao;
+﻿using Common;
+using Model.Dao;
 using Model.EF;
 using OnlineShop.Models;
 using System;
@@ -132,7 +133,7 @@ namespace OnlineShop.Controllers
                 var id = new OrderDao().Insert(order);
                 var cart = (List<CartItem>)Session[CartSession];
                 var detailDao = new Model.Dao.OrderDetailDao();
-                
+                decimal total = 0;
                 foreach (var item in cart)
                 {
                     var orderDetail = new OrderDetail();
@@ -140,9 +141,21 @@ namespace OnlineShop.Controllers
                     orderDetail.OrderID = id;
                     orderDetail.Price = item.Product.Price;
                     orderDetail.Quantity = item.Quantity;
-                    detailDao.Insert(orderDetail);                 
+                    detailDao.Insert(orderDetail);
+
+                    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
                 }
-                
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/client/template/neworder.html"));
+
+                content = content.Replace("{{CustomerName}}", shipName);
+                content = content.Replace("{{Phone}}", mobile);
+                content = content.Replace("{{Email}}", email);
+                content = content.Replace("{{Address}}", address);
+                content = content.Replace("{{Total}}", total.ToString("N0"));
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new MailHelper().SendMail(email, "Đơn hàng mới từ ShoeStore", content);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ ShoeStore", content);
             }
             catch (Exception ex)
             {
@@ -152,6 +165,10 @@ namespace OnlineShop.Controllers
             return Redirect("/hoan-thanh");
         }
         public ActionResult Success()
+        {
+            return View();
+        }
+        public ActionResult LoiThanhToan()
         {
             return View();
         }
