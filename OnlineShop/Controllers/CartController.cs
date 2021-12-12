@@ -154,8 +154,8 @@ namespace OnlineShop.Controllers
                 content = content.Replace("{{Total}}", total.ToString("N0"));
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-                new MailHelper().SendMail(email, "Đơn hàng mới từ ShoeStore", content);
-                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ ShoeStore", content);
+                new MailHelper().SendMail(email, "Đơn hàng mới từ Shoe Garden Store", content);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ Shoe Garden Store", content);
             }
             catch (Exception ex)
             {
